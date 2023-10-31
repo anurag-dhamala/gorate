@@ -2,22 +2,22 @@ package handlers
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 )
 
 type User struct {
-	name string
+	Name string
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	var user = User{
-		name: "Anurag",
+		Name: "Anurag",
 	}
-	userByte, err := json.Marshal(user)
-	if err != nil {
-		log.Fatal("error occurred")
-	}
+
+	userByte, _ := json.Marshal(user)
+
+	w.Header().Set("Content-Type", "application/json")
+	// json.NewEncoder(w).Encode(user)
 	w.Write(userByte)
 }
